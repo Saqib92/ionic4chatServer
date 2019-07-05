@@ -102,6 +102,13 @@ app.get('/abc/:id', (req, res)=>{
 })
 
 
+app.get('/getApi', (req, res)=>{
+  //console.log(req.query);
+  //res.send('id: ' +  req.params.id);
+  res.send({status: true, message: 'this is get api Response'});
+})
+
+
 
 io.on('connection', (socket) => {
   
