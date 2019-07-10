@@ -5,13 +5,15 @@ var logger = require('morgan');
 var methodOverride = require('method-override')
 var cors = require('cors');
 var mysql = require('mysql');
+const fileUpload = require('express-fileupload');
+
+
  
 var app = express(); 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(cors());
-const fileUpload = require('express-fileupload');
 
 let http = require('http').Server(app);
 let io = require('socket.io')(http);
@@ -71,10 +73,7 @@ var con = mysql.createConnection({
 
 
 app.post('/signup', function(req, res) {
-
 	signup.signup(req, res, con)
-   
-
 });
 
 
@@ -91,6 +90,7 @@ app.post('/search', (req, res)=>{
 app.post('/addFriend', (req, res)=>{
   addFriend.addFriend(req, res, con);
 })
+
 app.post('/findFriends', (req, res)=>{
   findFriends.findFriends(req, res, con);
 })
@@ -100,7 +100,6 @@ app.get('/abc/:id', (req, res)=>{
 	//res.send('id: ' +  req.params.id);
 	res.send({id: req.params.id, data: req.query});
 })
-
 
 app.get('/getApi', (req, res)=>{
   //console.log(req.query);
@@ -139,5 +138,3 @@ io.on('connection', (socket) => {
 
 
 });
-
-
